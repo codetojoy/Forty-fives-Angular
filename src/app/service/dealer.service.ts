@@ -1,15 +1,17 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
-import { ConfigService } from './config.service';
+import { ConfigService } from "./config.service";
+import { Card } from "../model/card/card.model";
+import { Deck } from "../model/card/deck.model";
 /*
 import { AuditService } from "./audit.service";
 
-import { Deck } from "../model/deck.model";
 import { Card, Hand, Kitty } from "../model/hand.model";
 import { Bid, Player, Players } from "../model/player.model";
 */
-import { Table } from '../model/table.model';
-import { Player } from '../model/player.model';
+import { Table } from "../model/table.model";
+import { Player } from "../model/player.model";
+import { Constants } from "../shared/constants";
 
 @Injectable()
 export class DealerService {
@@ -36,6 +38,10 @@ export class DealerService {
     console.log(`TRACER DealerService newGame`);
     let players: Player[] = this.configService.getPlayers();
     this.table = new Table(players);
+    let deck: Deck = new Deck();
+    deck.shuffle();
+    console.log(`TRACER DS cp montreal maroons`);
+    this.dealHands(this.table, deck);
     this.emitTableChanged();
     /*
     const numCards: number = this.configService.getNumCards();
@@ -50,6 +56,17 @@ export class DealerService {
     this.table.assignPrizeCard();
     this.emitTableChanged();
     */
+  }
+
+  dealHands(table: Table, deck: Deck) {
+    table.players.forEach((player) => this.dealHand(player, deck));
+  }
+
+  dealHand(player: Player, deck: Deck) {
+    for (let i = 1; i <= Constants.NUM_CARDS_IN_HAND; i++) {
+      let card: Card = deck.takeCard();
+      player.hand.dealCard(card);
+    }
   }
 
   /*

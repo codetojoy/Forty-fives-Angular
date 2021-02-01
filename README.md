@@ -18,4 +18,5 @@ npm install --save bootstrap@3
 ### TODO
 
 * check license on card images
+* deal out cards with transparency
 

@@ -1,2 +1,11 @@
+<hr />
 <p>{{ player.name }}</p>
 <p>{{ player.isInteractive }}</p>
+<!--
+<p>{{ player.emitLog() }}</p>
+-->
+<div *ngFor="let card of player.hand.cards">
+  <div class="card" (click)="onClick(card)">
+    <img src="./{{ card.getImageURL() }}" />
+  </div>
+</div>

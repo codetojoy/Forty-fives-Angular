@@ -1,0 +1,30 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img { 
+    width: 80%;
+    height: auto;
+}
+
+.Hand {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 800px) {
+  .Hand {
+     flex-direction: row;
+     justify-content: space-between;
+  }
+
+  .Card {
+    margin-right: 1rem;
+  }
+}
+
